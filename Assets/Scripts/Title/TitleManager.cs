@@ -12,7 +12,12 @@ public class TitleManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+
+        else if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("Main");
         }
