@@ -22,7 +22,7 @@ public class MainManager : MonoBehaviour
 
     public void StartButton()
     {
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("Start");
     }
 
     public void CharactersButton()
@@ -32,7 +32,7 @@ public class MainManager : MonoBehaviour
 
     public void EndingsButton()
     {
-           SceneManager.LoadScene("Endings");
+        SceneManager.LoadScene("Endings");
     }
 
     public void CreditsButton()

@@ -17,7 +17,7 @@ public class TitleManager : MonoBehaviour
             Application.Quit();
         }
 
-        else if (Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape))
+        else if ((Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(0)))
         {
             SceneManager.LoadScene("Main");
         }
