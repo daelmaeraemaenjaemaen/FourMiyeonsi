@@ -1,25 +1,49 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using System.Collections;
 
 public class TitleManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    bool loading = false;
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (loading) return;
+
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             Application.Quit();
+            return;
         }
 
-        else if ((Input.anyKeyDown && !Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(0)))
+        if (Keyboard.current != null && Keyboard.current.anyKey.wasPressedThisFrame)
         {
-            SceneManager.LoadScene("Main");
+            loading = true;
+            StartCoroutine(LoadMain());
+            return;
         }
+
+        if (Mouse.current != null && Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            loading = true;
+            StartCoroutine(LoadMainAfterMouseRelease());
+        }
+    }
+
+    IEnumerator LoadMain()
+    {
+        yield return null;
+        SceneManager.LoadScene("Main");
+    }
+
+    IEnumerator LoadMainAfterMouseRelease()
+    {
+        while (Mouse.current != null && Mouse.current.leftButton.isPressed)
+        {
+            yield return null;
+        }
+
+        SceneManager.LoadScene("Main");
     }
 }

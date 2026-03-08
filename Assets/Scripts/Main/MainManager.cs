@@ -1,42 +1,47 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class MainManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
+    bool loading = false;
 
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (loading) return;
+
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
+            loading = true;
             SceneManager.LoadScene("Title");
         }
     }
 
     public void StartButton()
     {
+        if (loading) return;
+        loading = true;
         SceneManager.LoadScene("Start");
     }
 
     public void CharactersButton()
     {
+        if (loading) return;
+        loading = true;
         SceneManager.LoadScene("Characters");
     }
 
     public void EndingsButton()
     {
+        if (loading) return;
+        loading = true;
         SceneManager.LoadScene("Endings");
     }
 
     public void CreditsButton()
     {
+        if (loading) return;
+        loading = true;
         SceneManager.LoadScene("Credits");
     }
 }
